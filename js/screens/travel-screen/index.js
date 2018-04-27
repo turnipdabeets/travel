@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native';
+import { Platform, StyleSheet, Text, View, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { FlightGroup } from './components';
+import styles from '../../common/style';
+import { ICON_COLOR } from '../../common';
+
+// TODO deep link to passbook for airline ticket?
+// hover over airline abreviations to show location
 
 export default class Travel extends Component {
   render() {
-    console.log('this.props', this.props);
+    const { data } = this.props;
     return (
-      <View style={styles.container}>
-        <Text>{this.props.title}</Text>
-        <Text>{this.props.destination}</Text>
-      </View>
+      <ScrollView style={styles.container}>
+        {data.flights && <FlightGroup flights={data.flights} />}
+        <Icon style={styles.icon} name="train" size={30} color={ICON_COLOR} />
+        <Icon style={styles.icon} name="car" size={30} color={ICON_COLOR} />
+      </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F7F8F9'
-  }
-});

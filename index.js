@@ -4,21 +4,25 @@ import {
   registerScreens,
   registerScreenVisibilityListener
 } from './js/screens';
+import { PRIMARY_COLOR, BACKGROUND_COLOR, WHITE } from './js/common';
 
 registerScreens();
 registerScreenVisibilityListener();
 
 export const navigatorStyle = {
-  navBarBackgroundColor: '#A43820',
-  navBarTextColor: '#ffffFF',
-  statusBarTextColorScheme: 'light',
-  drawUnderNavBar: false
+  navBarBackgroundColor: PRIMARY_COLOR,
+  navBarTextColor: WHITE,
+  navBarButtonColor: WHITE,
+  navBarSubtitleColor: BACKGROUND_COLOR,
+  navBarSubtitleFontSize: 13
+  // statusBarTextColorScheme: 'light',
+  // drawUnderNavBar: false
 };
 
 Navigation.startSingleScreenApp({
   screen: {
     screen: 'travel.Outline',
-    title: 'Trip Planner',
+    title: 'Itinerary',
     navigatorStyle,
     overrideBackPress: true
   }
