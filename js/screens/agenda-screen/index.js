@@ -14,7 +14,6 @@ export default class Agenda extends Component {
     console.log('this.props', this.props);
     return (
       <ScrollView style={styles.container}>
-        <Unscheduled />
         <DayCard data={this.props.data} />
       </ScrollView>
     );

@@ -1,5 +1,5 @@
 import DayCard from './DayCard';
-import Unscheduled from './Unscheduled';
 import EditableText from './EditableText';
+import Title from './Title';
 
-export { DayCard, Unscheduled, EditableText };
+export { DayCard, EditableText, Title };

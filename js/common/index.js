@@ -3,3 +3,5 @@ export const ICON_COLOR = '#900';
 export const PRIMARY_COLOR = '#A43820';
 export const SECONDARY_COLOR = '#d96014';
 export const WHITE = '#FFFFFF';
+export const GREEN = '#228B22';
+export const BUTTONSIZE = 55;
