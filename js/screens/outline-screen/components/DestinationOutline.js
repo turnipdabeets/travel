@@ -27,6 +27,16 @@ const Outline = ({ pushOutlineType, percentagePlanned }) => {
   });
 };
 
+function getAgendaPercentage(agenda) {
+  // calculate if at least one event in a day
+  const days = Object.keys(agenda);
+  const total = days.length;
+  const completed = days.reduce((total, day) => {
+    return agenda[day].length > 0 ? total + 1 : total;
+  }, 0);
+  return completed / total * 100;
+}
+
 const DestinationOutline = ({ destination, pushOutlineType, data }) => {
   return (
     <Card
@@ -41,7 +51,7 @@ const DestinationOutline = ({ destination, pushOutlineType, data }) => {
         percentagePlanned={{
           Travel: data.flights.length >= 1 ? '100' : '0',
           Accomodations: data.accomodations.length >= 1 ? '100' : '0',
-          Agenda: data.agenda.length >= 1 ? '100' : '0',
+          Agenda: getAgendaPercentage(data.agenda),
           Notes: data.notes.length >= 1 ? '100' : '0'
         }}
       />

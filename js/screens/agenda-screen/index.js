@@ -3,17 +3,20 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View,
+  ScrollView,
   TouchableOpacity
 } from 'react-native';
+import { ListItem, Card, colors } from 'react-native-elements';
+import { DayCard, Unscheduled } from './components';
 
 export default class Agenda extends Component {
   render() {
     console.log('this.props', this.props);
     return (
-      <View style={styles.container}>
-        <Text>{this.props.title}</Text>
-      </View>
+      <ScrollView style={styles.container}>
+        <Unscheduled />
+        <DayCard data={this.props.data} />
+      </ScrollView>
     );
   }
 }
