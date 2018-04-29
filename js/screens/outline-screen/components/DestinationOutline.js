@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ListItem, Card, colors } from 'react-native-elements';
 import _styles from '../../../common/style';
 
@@ -16,19 +16,21 @@ const Outline = ({ pushOutlineType, percentagePlanned }) => {
   return outline.map((category, i) => {
     const subtitle = percentagePlanned[category];
     return (
-      <ListItem
-        key={i}
-        title={category}
-        titleStyle={styles.listTitle}
-        bottomDivider={true}
-        subtitle={`${subtitle}%`}
-        subtitleStyle={[
-          styles.listSubtitle,
-          { color: getColor(subtitle / 100) }
-        ]}
-        underlayColor={'rgba(249, 249, 249, 0.8)'}
-        onPress={() => pushOutlineType(category)}
-      />
+      <View>
+        <View style={_styles.divider} />
+        <ListItem
+          key={i}
+          title={category}
+          titleStyle={styles.listTitle}
+          subtitle={`${subtitle}%`}
+          subtitleStyle={[
+            styles.listSubtitle,
+            { color: getColor(subtitle / 100) }
+          ]}
+          containerStyle={styles.list}
+          onPress={() => pushOutlineType(category)}
+        />
+      </View>
     );
   });
 };
@@ -69,5 +71,6 @@ export default DestinationOutline;
 
 const styles = StyleSheet.create({
   listTitle: { fontSize: 12 },
-  listSubtitle: { fontSize: 10 }
+  listSubtitle: { fontSize: 10 },
+  list: { padding: 10 }
 });

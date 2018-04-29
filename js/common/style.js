@@ -11,9 +11,14 @@ export default StyleSheet.create({
     padding: 16
   },
   cardStyle: { padding: 0 },
+  cardStyleEndToEnd: { padding: 0, marginLeft: 0, marginRight: 0 },
   cardDivider: {
     marginBottom: 0,
     backgroundColor: colors.greyOutline
   },
-  cardTitle: { marginTop: 15 }
+  cardTitle: { marginTop: 15 },
+  divider: {
+    borderTopWidth: 1,
+    borderTopColor: colors.greyOutline
+  }
 });
