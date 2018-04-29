@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-import { ListItem, Card, colors } from 'react-native-elements';
 import { DayCard, Unscheduled } from './components';
+import styles from '../../common/style';
 
 export default class Agenda extends Component {
   render() {
@@ -20,10 +20,3 @@ export default class Agenda extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F7F8F9'
-  }
-});

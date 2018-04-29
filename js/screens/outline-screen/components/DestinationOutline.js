@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ListItem, Card, colors } from 'react-native-elements';
+import _styles from '../../../common/style';
 
 // TODO more sophisticated precentage model
 const outline = ['Travel', 'Accomodations', 'Agenda', 'Notes'];
@@ -18,8 +19,13 @@ const Outline = ({ pushOutlineType, percentagePlanned }) => {
       <ListItem
         key={i}
         title={category}
+        titleStyle={styles.listTitle}
+        bottomDivider={true}
         subtitle={`${subtitle}%`}
-        subtitleStyle={{ color: getColor(subtitle / 100) }}
+        subtitleStyle={[
+          styles.listSubtitle,
+          { color: getColor(subtitle / 100) }
+        ]}
         underlayColor={'rgba(249, 249, 249, 0.8)'}
         onPress={() => pushOutlineType(category)}
       />
@@ -42,9 +48,9 @@ const DestinationOutline = ({ destination, pushOutlineType, data }) => {
     <Card
       title={destination}
       titleNumberOfLines={2}
-      containerStyle={styles.cardStyle}
-      dividerStyle={styles.cardDivider}
-      titleStyle={styles.cardTitle}
+      containerStyle={_styles.cardStyle}
+      dividerStyle={_styles.cardDivider}
+      titleStyle={_styles.cardTitle}
     >
       <Outline
         pushOutlineType={pushOutlineType.bind(this, destination)}
@@ -62,10 +68,6 @@ const DestinationOutline = ({ destination, pushOutlineType, data }) => {
 export default DestinationOutline;
 
 const styles = StyleSheet.create({
-  cardStyle: { padding: 0 },
-  cardDivider: {
-    marginBottom: 0,
-    backgroundColor: colors.greyOutline
-  },
-  cardTitle: { marginTop: 15 }
+  listTitle: { fontSize: 12 },
+  listSubtitle: { fontSize: 10 }
 });

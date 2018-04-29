@@ -25,7 +25,7 @@ class EditableText extends React.Component {
   renderText() {
     return (
       <TouchableOpacity onPress={() => this.startEditing()}>
-        <Text {...this.props.textProps}>{this.props.text}</Text>
+        <Text {...this.props}>{this.props.text}</Text>
       </TouchableOpacity>
     );
   }
@@ -36,11 +36,12 @@ class EditableText extends React.Component {
         <TextInput
           autoFocus
           opacity={this.state.editing ? 1 : 0.1}
-          {...this.props.textInputProps}
+          {...this.props}
           onChangeText={text => this.setState({ text })}
           value={this.state.text}
-          returnKeyType={'done'}
+          returnKeyType="done"
           onBlur={() => this.stopEditing()}
+          underlineColorAndroid="transparent"
         />
       </View>
     );
@@ -58,15 +59,11 @@ class EditableText extends React.Component {
 
 EditableText.propTypes = {
   text: PropTypes.string,
-  sendText: PropTypes.func.isRequired,
-  textProps: PropTypes.shape(),
-  textInputProps: PropTypes.shape()
+  sendText: PropTypes.func.isRequired
 };
 
 EditableText.defaultProps = {
-  text: '',
-  textProps: {},
-  textInputProps: {}
+  text: ''
 };
 
 export default EditableText;

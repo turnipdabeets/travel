@@ -11,7 +11,7 @@
     "eslint": "^4.19.1",
     "react": "16.3.1",
     "react-native": "0.55.3",
-    "react-native-elements": "^0.19.1",
+    "react-native-elements": "v1.0.0-beta4",
     "react-native-navigation": "^1.1.446",
     "react-native-vector-icons": "^4.6.0"
   },

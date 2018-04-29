@@ -1,33 +1,61 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { ListItem, Card, colors } from 'react-native-elements';
 import EditableText from './EditableText';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { ICON_COLOR } from '../../../common';
+import _styles from '../../../common/style';
+const { width } = Dimensions.get('window');
 
-const Activities = ({ events, day, setAgenda }) => {
+const ActivityRow = ({ events, day, setActivity }) => {
   return events.map((event, i) => {
     return (
-      <View key={i} style={{ padding: 10 }}>
+      <View key={i} style={styles.activityRow}>
         <EditableText
           key={i}
           text={event.activity}
-          sendText={newAgenda => setAgenda(day, newAgenda, i)}
+          style={styles.activityRowText}
+          sendText={activity => setActivity(day, activity, i)}
         />
       </View>
     );
   });
 };
 
+const Title = ({ day, onPress }) => (
+  <View>
+    <Text style={styles.title}>{day}</Text>
+    <View style={styles.titleIcon}>
+      <Icon
+        onPress={onPress}
+        style={_styles.icon}
+        name="plus"
+        size={15}
+        color={ICON_COLOR}
+      />
+    </View>
+  </View>
+);
+
 class DayCard extends React.Component {
   state = this.props.data.agenda; // agenda by date
 
-  setAgenda = (day, agenda, i) => {
+  setActivity = (day, activity, idx) => {
     this.setState(state => {
       let events = [...state[day]]; // keep previous events
-      events[i] = { ...events[i] }; // get event we want to change
-      events[i].activity = agenda; // set new agenda
+      events[idx] = { ...events[idx] }; // get event we want to change
+      events[idx].activity = activity; // set new agenda
       return { [day]: events };
     });
     // need to persist this change too
+  };
+
+  addEmptyEvent = day => {
+    this.setState(state => {
+      const events = [...state[day]];
+      const eventsWithBlankAdded = [{}, ...events];
+      return { [day]: eventsWithBlankAdded };
+    });
   };
 
   render() {
@@ -35,15 +63,15 @@ class DayCard extends React.Component {
     return days.map((day, i) => (
       <Card
         key={i}
-        title={day}
-        containerStyle={styles.cardStyle}
-        dividerStyle={styles.cardDivider}
-        titleStyle={styles.cardTitle}
+        title={<Title day={day} onPress={() => this.addEmptyEvent(day)} />}
+        containerStyle={_styles.cardStyle}
+        dividerStyle={_styles.cardDivider}
+        titleStyle={_styles.cardTitle}
       >
-        <Activities
+        <ActivityRow
           events={this.state[day]}
           day={day}
-          setAgenda={this.setAgenda}
+          setActivity={this.setActivity}
         />
       </Card>
     ));
@@ -53,10 +81,18 @@ class DayCard extends React.Component {
 export default DayCard;
 
 const styles = StyleSheet.create({
-  cardStyle: { padding: 0 },
-  cardDivider: {
-    marginBottom: 0,
-    backgroundColor: colors.greyOutline
+  activityRow: {
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.greyOutline
   },
-  cardTitle: { marginTop: 15 }
+  activityRowText: { fontSize: 12 },
+  title: {
+    alignItems: 'center',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginBottom: 15,
+    marginTop: 15
+  },
+  titleIcon: { position: 'absolute', top: 0, left: width - 75 }
 });
