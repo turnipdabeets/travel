@@ -16,10 +16,9 @@ const Outline = ({ pushOutlineType, percentagePlanned }) => {
   return outline.map((category, i) => {
     const subtitle = percentagePlanned[category];
     return (
-      <View>
+      <View key={i}>
         <View style={_styles.divider} />
         <ListItem
-          key={i}
           title={category}
           titleStyle={styles.listTitle}
           subtitle={`${subtitle}%`}
