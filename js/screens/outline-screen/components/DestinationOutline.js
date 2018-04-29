@@ -40,7 +40,7 @@ function getAgendaPercentage(agenda) {
   const completed = days.reduce((total, day) => {
     return agenda[day].length > 0 ? total + 1 : total;
   }, 0);
-  return completed / total * 100;
+  return Math.round(completed / total * 100);
 }
 
 const DestinationOutline = ({ destination, pushOutlineType, data }) => {
