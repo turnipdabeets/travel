@@ -25,7 +25,7 @@ class EditableText extends React.Component {
   renderText() {
     return (
       <TouchableOpacity onPress={() => this.startEditing()}>
-        <Text {...this.props}>{this.props.text}</Text>
+        <Text {...this.props}>{this.props.text || ''}</Text>
       </TouchableOpacity>
     );
   }
