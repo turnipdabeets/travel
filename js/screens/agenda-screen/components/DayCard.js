@@ -4,7 +4,7 @@ import { EditableText, Title, ActivityRow } from '../components';
 import _styles from '../../../common/style';
 
 const DayCard = ({
-  changeActivity,
+  editActivity,
   addActivity,
   deleteActivity,
   toggleActivityComplete,
@@ -22,7 +22,7 @@ const DayCard = ({
       <ActivityRow
         events={agenda[day]}
         day={day}
-        changeActivity={changeActivity}
+        editActivity={editActivity}
         deleteActivity={deleteActivity}
         toggleActivityComplete={toggleActivityComplete}
       />

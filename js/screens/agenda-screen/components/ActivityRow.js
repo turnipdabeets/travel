@@ -24,7 +24,7 @@ const DeleteButton = ({ deleteActivity, day, idx }) => (
   </View>
 );
 
-const ActivityBody = ({ event, day, idx, changeActivity }) => (
+const ActivityBody = ({ event, day, idx, editActivity }) => (
   <View style={styles.activityWrapper}>
     <View style={styles.activityRow}>
       <Icon
@@ -37,7 +37,7 @@ const ActivityBody = ({ event, day, idx, changeActivity }) => (
         <EditableText
           text={event.activity}
           style={styles.activityRowText}
-          sendText={activity => changeActivity(day, activity, idx)}
+          sendText={activity => editActivity(day, activity, idx)}
         />
       </View>
     </View>
@@ -47,7 +47,7 @@ const ActivityBody = ({ event, day, idx, changeActivity }) => (
 const ActivityRow = ({
   day,
   events,
-  changeActivity,
+  editActivity,
   deleteActivity,
   toggleActivityComplete
 }) =>
@@ -67,7 +67,7 @@ const ActivityRow = ({
             event={event}
             day={day}
             idx={i}
-            changeActivity={changeActivity}
+            editActivity={editActivity}
           />
         </Swipeable>
       </View>

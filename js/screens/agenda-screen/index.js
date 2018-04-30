@@ -14,7 +14,7 @@ export default class Agenda extends Component {
     agenda: this.props.data.agenda // agenda by date
   };
 
-  changeActivity = (day, activity, idx) => {
+  editActivity = (day, activity, idx) => {
     this.setState(state => {
       let events = [...state.agenda[day]]; // keep previous events
       events[idx] = { ...events[idx] }; // get event we want to change
@@ -62,7 +62,7 @@ export default class Agenda extends Component {
         <DayCard
           days={Object.keys(agenda)}
           agenda={agenda}
-          changeActivity={this.changeActivity}
+          editActivity={this.editActivity}
           deleteActivity={this.deleteActivity}
           addActivity={this.addActivity}
           toggleActivityComplete={this.toggleActivityComplete}
