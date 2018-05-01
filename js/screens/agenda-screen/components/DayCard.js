@@ -8,6 +8,7 @@ const DayCard = ({
   addActivity,
   deleteActivity,
   toggleActivityComplete,
+  reassignActivityDate,
   days,
   agenda
 }) =>
@@ -25,6 +26,7 @@ const DayCard = ({
         editActivity={editActivity}
         deleteActivity={deleteActivity}
         toggleActivityComplete={toggleActivityComplete}
+        reassignActivityDate={reassignActivityDate.bind(this, days)}
       />
     </Card>
   ));

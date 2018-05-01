@@ -4,4 +4,6 @@ export const PRIMARY_COLOR = '#A43820';
 export const SECONDARY_COLOR = '#d96014';
 export const WHITE = '#FFFFFF';
 export const GREEN = '#228B22';
+export const ORANGE = '#ffae42';
+export const GREY = '#9f9f9f';
 export const BUTTONSIZE = 55;

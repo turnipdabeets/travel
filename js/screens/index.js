@@ -4,6 +4,7 @@ import Travel from './travel-screen';
 import Accomodations from './accomodations-screen';
 import Agenda from './agenda-screen';
 import Notes from './notes-screen';
+import DateLightBox from './lightbox-screen';
 
 export function registerScreens() {
   Navigation.registerComponent('travel.Outline', () => Outline);
@@ -14,6 +15,7 @@ export function registerScreens() {
   );
   Navigation.registerComponent('travel.outline.Agenda', () => Agenda);
   Navigation.registerComponent('travel.outline.Notes', () => Notes);
+  Navigation.registerComponent('travel.agenda.lightbox', () => DateLightBox);
 }
 
 export function registerScreenVisibilityListener() {

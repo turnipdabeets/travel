@@ -42,6 +42,7 @@ export default class Agenda extends Component {
       ];
       return { agenda: { ...state.agenda, [day]: eventsWithBlankAdded } };
     });
+    // need to persist this change too
   };
 
   toggleActivityComplete = (day, idx) => {
@@ -52,6 +53,43 @@ export default class Agenda extends Component {
         completed: !state.agenda[day][idx].completed
       };
       return { agenda: { ...state.agenda, [day]: events } };
+    });
+    // need to persist this change too
+  };
+
+  reassignActivityDate = (days, events, event, idx, day) => {
+    this.props.navigator.showLightBox({
+      screen: 'travel.agenda.lightbox',
+      passProps: {
+        days,
+        event,
+        day,
+        dismiss: newDate => {
+          this.props.navigator.dismissLightBox();
+          this.setState(state => {
+            let oldEvents = [...state.agenda[day]];
+            let newEvents = [...state.agenda[newDate]];
+            // add to newEvents
+            newEvents = [...newEvents, event];
+            // remove from oldEvents
+            oldEvents = oldEvents.filter(event => event !== events[idx]);
+            return {
+              agenda: {
+                ...state.agenda,
+                [day]: oldEvents,
+                [newDate]: newEvents
+              }
+            };
+          });
+          // need to persist this change too
+        }
+      },
+      style: {
+        backgroundBlur: 'dark', // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: 'transparent', // tint color for the background, you can specify alpha here (optional)
+        tapBackgroundToDismiss: true // dismisses LightBox on background taps (optional)
+      },
+      adjustSoftInput: 'resize' // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
     });
   };
 
@@ -66,6 +104,7 @@ export default class Agenda extends Component {
           deleteActivity={this.deleteActivity}
           addActivity={this.addActivity}
           toggleActivityComplete={this.toggleActivityComplete}
+          reassignActivityDate={this.reassignActivityDate}
         />
       </ScrollView>
     );

@@ -3,7 +3,14 @@ import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Swipeable from 'react-native-swipeable';
 import { EditableText } from '../components';
-import { ICON_COLOR, WHITE, BUTTONSIZE, GREEN } from '../../../common';
+import {
+  ICON_COLOR,
+  WHITE,
+  BUTTONSIZE,
+  GREEN,
+  ORANGE,
+  GREY
+} from '../../../common';
 import _styles from '../../../common/style';
 
 const LeftContent = () => (
@@ -12,12 +19,24 @@ const LeftContent = () => (
   </View>
 );
 
-const DeleteButton = ({ deleteActivity, day, idx }) => (
+const DeleteButton = ({ onPress }) => (
   <View style={styles.rightButton}>
     <Icon
-      onPress={() => deleteActivity(day, idx)}
+      onPress={onPress}
       style={styles.swipeButtonRight}
       name="trash"
+      size={15}
+      color={WHITE}
+    />
+  </View>
+);
+
+const ChangeDay = ({ onPress }) => (
+  <View style={styles.calendarButton}>
+    <Icon
+      onPress={onPress}
+      style={styles.swipeButtonRight}
+      name="calendar"
       size={15}
       color={WHITE}
     />
@@ -31,7 +50,7 @@ const ActivityBody = ({ event, day, idx, editActivity }) => (
         style={styles.activityIcon}
         name={event.completed ? 'check' : 'bell-o'}
         size={15}
-        color={'grey'}
+        color={GREY}
       />
       <View style={styles.activityText}>
         <EditableText
@@ -49,7 +68,8 @@ const ActivityRow = ({
   events,
   editActivity,
   deleteActivity,
-  toggleActivityComplete
+  toggleActivityComplete,
+  reassignActivityDate
 }) =>
   events.map((event, i) => {
     return (
@@ -60,7 +80,10 @@ const ActivityRow = ({
           onLeftActionRelease={() => toggleActivityComplete(day, i)}
           rightButtonWidth={BUTTONSIZE}
           rightButtons={[
-            <DeleteButton deleteActivity={deleteActivity} day={day} idx={i} />
+            <DeleteButton onPress={() => deleteActivity(day, i)} />,
+            <ChangeDay
+              onPress={() => reassignActivityDate(events, event, i, day)}
+            />
           ]}
         >
           <ActivityBody
@@ -93,5 +116,6 @@ const styles = StyleSheet.create({
   swipeButtonLeft: { paddingTop: 10, paddingBottom: 10, marginLeft: 280 },
   swipeButtonRight: { paddingTop: 10, paddingBottom: 10, marginLeft: 20 },
   leftContent: { backgroundColor: GREEN },
-  rightButton: { backgroundColor: ICON_COLOR }
+  rightButton: { backgroundColor: ICON_COLOR },
+  calendarButton: { backgroundColor: ORANGE }
 });
