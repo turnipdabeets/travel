@@ -48,7 +48,7 @@ const ActivityBody = ({ event, day, idx, editActivity }) => (
     <View style={styles.activityRow}>
       <Icon
         style={styles.activityIcon}
-        name={event.completed ? 'check' : 'bell-o'}
+        name={event.completed ? 'check-square-o' : 'square-o'}
         size={15}
         color={GREY}
       />
