@@ -6,8 +6,11 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
+import KeyboardManager from 'react-native-keyboard-manager';
 import { DayCard, Unscheduled } from './components';
 import styles from '../../common/style';
+
+KeyboardManager.setEnableAutoToolbar(false); // removed the 'DONE' button on inputAssessoryView
 
 export default class Agenda extends Component {
   state = {
